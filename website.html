@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultralight Hunting Pack | LudicLife</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;400;600;800&family=Crimson+Pro:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a1a1a;
+            --secondary: #4a4a4a;
+            --accent: #d67e4b;
+            --accent-dark: #8b7355;
+            --light: #f5f5f0;
+            --border: #d4d4ce;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Pro', serif;
+            color: var(--primary);
+            background: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section with Image */
+        .hero {
+            height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            position: relative;
+            background: linear-gradient(165deg, #e8e6df 0%, #f5f5f0 50%, #dad8d0 100%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(139, 115, 85, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(139, 115, 85, 0.04) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .hero-content {
+            padding: 0 8%;
+            z-index: 2;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        .brand {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .brand::after {
+            content: '◆';
+            position: absolute;
+            right: -1.5rem;
+            top: 50%;
+            transform: translateY(-50%) rotate(45deg);
+            font-size: 0.5rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(-50%) rotate(45deg) translateY(0); }
+            50% { transform: translateY(-50%) rotate(45deg) translateY(-5px); }
+        }
+
+        .hero h1 {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: clamp(3rem, 6vw, 5.5rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            line-height: 0.95;
+        }
+
+        .hero .subtitle {
+            font-size: clamp(1.2rem, 2vw, 1.6rem);
+            font-weight: 300;
+            color: var(--secondary);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+
+        .hero .description {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--secondary);
+            max-width: 500px;
+        }
+
+        .hero-image {
+            position: relative;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            padding: 5%;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+            animation: fadeIn 1.5s ease-out 0.3s both;
+            filter: drop-shadow(0 20px 60px rgba(0,0,0,0.15));
+        }
+
+        /* Gallery Section */
+        .gallery {
+            padding: 0;
+            background: white;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 1;
+            cursor: pointer;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover {
+            z-index: 10;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.3) 100%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+
+        /* Detail Showcase */
+        .detail-showcase {
+            padding: 10rem 5%;
+            background: var(--primary);
+            color: var(--light);
+        }
+
+        .showcase-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .showcase-image {
+            position: relative;
+        }
+
+        .showcase-image img {
+            width: 100%;
+            height: auto;
+            border: 1px solid rgba(139, 115, 85, 0.3);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .showcase-text h2 {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 2rem;
+            line-height: 1.1;
+            color: var(--light);
+        }
+
+        .showcase-text p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: rgba(245, 245, 240, 0.8);
+            margin-bottom: 1.5rem;
+        }
+
+        .detail-list {
+            margin-top: 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .detail-icon {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            transform: rotate(45deg);
+            flex-shrink: 0;
+        }
+
+        .detail-item span {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 8%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 1.5s forwards;
+            z-index: 2;
+        }
+
+        .scroll-indicator span {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--secondary);
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 50px;
+            background: var(--accent);
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+
+        /* Content Sections */
+        section {
+            padding: 8rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        h2 {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 3rem;
+            line-height: 1.1;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.2s forwards;
+        }
+
+        /* Philosophy Section */
+        .philosophy {
+            background: white;
+        }
+
+        .philosophy-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: start;
+        }
+
+        .philosophy-text p {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: var(--secondary);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.4s forwards;
+        }
+
+        .philosophy-text p:first-of-type::first-letter {
+            font-size: 4rem;
+            font-weight: 600;
+            float: left;
+            line-height: 0.8;
+            margin: 0.1em 0.1em 0 0;
+            color: var(--accent);
+        }
+
+        .philosophy-stats {
+            display: grid;
+            gap: 3rem;
+        }
+
+        .stat {
+            border-left: 2px solid var(--accent);
+            padding-left: 2rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.6s forwards;
+        }
+
+        .stat-number {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--secondary);
+        }
+
+        /* Features Section */
+        .features {
+            background: var(--light);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 4rem;
+            margin-top: 4rem;
+        }
+
+        .feature {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+            transition: transform 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature:nth-child(1) { animation-delay: 0.2s; }
+        .feature:nth-child(2) { animation-delay: 0.4s; }
+        .feature:nth-child(3) { animation-delay: 0.6s; }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+
+        .feature h3 {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: -0.01em;
+        }
+
+        .feature p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--secondary);
+        }
+
+        /* Specifications Section */
+        .specifications {
+            background: white;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem 5rem;
+            margin-top: 3rem;
+        }
+
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .spec-item:nth-child(1) { animation-delay: 0.2s; }
+        .spec-item:nth-child(2) { animation-delay: 0.3s; }
+        .spec-item:nth-child(3) { animation-delay: 0.4s; }
+        .spec-item:nth-child(4) { animation-delay: 0.5s; }
+        .spec-item:nth-child(5) { animation-delay: 0.6s; }
+        .spec-item:nth-child(6) { animation-delay: 0.7s; }
+
+        .spec-label {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--secondary);
+        }
+
+        .spec-value {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* CTA Section */
+        .cta {
+            text-align: center;
+            padding: 10rem 5%;
+            background: var(--accent);
+            color: white;
+        }
+
+        .cta h2 {
+            color: white;
+            margin-bottom: 2rem;
+        }
+
+        .cta p {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.4s forwards;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.5rem 4rem;
+            background: white;
+            color: var(--accent);
+            text-decoration: none;
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border: 2px solid white;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.6s forwards;
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 5%;
+            text-align: center;
+            background: var(--primary);
+            color: var(--light);
+        }
+
+        footer p {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { transform: scaleY(1); transform-origin: top; }
+            50% { transform: scaleY(1.5); transform-origin: top; }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero {
+                grid-template-columns: 1fr;
+                height: auto;
+                padding: 5rem 0;
+            }
+
+            .hero-content {
+                order: 2;
+                padding: 3rem 5%;
+                text-align: center;
+            }
+
+            .hero .description {
+                margin: 0 auto;
+            }
+
+            .hero-image {
+                order: 1;
+                height: 60vh;
+            }
+
+            .scroll-indicator {
+                display: none;
+            }
+
+            .showcase-content {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-item {
+                aspect-ratio: 4/3;
+            }
+        }
+
+        @media (max-width: 968px) {
+            .philosophy-content,
+            .specs-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            section {
+                padding: 5rem 5%;
+            }
+
+            .features-grid {
+                gap: 3rem;
+            }
+
+            .cta {
+                padding: 6rem 5%;
+            }
+
+            .detail-showcase {
+                padding: 6rem 5%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="brand">LudicLife</div>
+            <h1>ULTRALIGHT</h1>
+            <p class="subtitle">Minimalist Hunting Backpack</p>
+            <p class="description">Handcrafted with precision. Designed for the backcountry. Every detail serves a purpose.</p>
+        </div>
+        <div class="hero-image">
+            <img src="frontView.jpg" alt="Ultralight Hunting Backpack Front View">
+        </div>
+        <div class="scroll-indicator">
+            <span>Explore</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery">
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="backView.jpg" alt="Back view showing honeycomb padding system">
+            </div>
+            <div class="gallery-item">
+                <img src="upperLeftView.jpg" alt="Upper left angle view">
+            </div>
+            <div class="gallery-item">
+                <img src="upperRightView.jpg" alt="Upper right angle view">
+            </div>
+            <div class="gallery-item">
+                <img src="frontView.jpg" alt="Front harness system">
+            </div>
+        </div>
+    </section>
+
+    <!-- Detail Showcase -->
+    <section class="detail-showcase">
+        <div class="showcase-content">
+            <div class="showcase-image">
+                <img src="backView.jpg" alt="Honeycomb padding detail">
+            </div>
+            <div class="showcase-text">
+                <h2>Engineered Comfort</h2>
+                <p>The honeycomb ventilation system provides superior breathability while maintaining structural support. Each hexagonal cell is strategically placed to distribute weight—because comfort fuels spontaneity.</p>
+                <p>Military-grade webbing and precision-stitched reinforcements ensure this pack can handle whatever adventure throws your way. Built tough, worn light.</p>
+                <div class="detail-list">
+                    <div class="detail-item">
+                        <div class="detail-icon"></div>
+                        <span>Honeycomb ventilation back panel</span>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon"></div>
+                        <span>Reinforced stress points at all seams</span>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon"></div>
+                        <span>Load-bearing webbing system</span>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon"></div>
+                        <span>Minimal hardware for reduced weight</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy Section -->
+    <section class="philosophy">
+        <div class="section-label">Philosophy</div>
+        <h2>Built for Spontaneous Adventure</h2>
+        <div class="philosophy-content">
+            <div class="philosophy-text">
+                <p>Life's best moments aren't scheduled—they're seized. This backpack embodies the spirit of spontaneous adventure, ready when opportunity calls. Every ounce matters when you're miles from civilization, chasing the unexpected.</p>
+                <p>LudicLife means embracing the playful side of serious pursuits. Designed and handcrafted with precision, yet built for those who refuse to overthink the journey. Minimalist by design, maximum by performance.</p>
+            </div>
+            <div class="philosophy-stats">
+                <div class="stat">
+                    <div class="stat-number">2.1 lbs</div>
+                    <div class="stat-label">Total Weight</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">3,200</div>
+                    <div class="stat-label">Cubic Inches</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Handcrafted</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="section-label">Key Features</div>
+        <h2>Engineered Simplicity</h2>
+        <div class="features-grid">
+            <div class="feature">
+                <div class="feature-icon">◇</div>
+                <h3>Ultralight Materials</h3>
+                <p>Premium ripstop nylon and reinforced stress points deliver durability without weighing you down. Freedom means traveling light.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">△</div>
+                <h3>Modular Design</h3>
+                <p>Adaptive attachment points let you customize for any adventure. Whether you're out for a day or a week, configure it your way.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">○</div>
+                <h3>Ready for Anything</h3>
+                <p>From backcountry hunts to spontaneous camping trips, this pack adapts to your plans—or lack thereof. That's the LudicLife way.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specifications Section -->
+    <section class="specifications">
+        <div class="section-label">Specifications</div>
+        <h2>Technical Details</h2>
+        <div class="specs-grid">
+            <div class="spec-item">
+                <span class="spec-label">Weight</span>
+                <span class="spec-value">2.1 lbs</span>
+            </div>
+            <div class="spec-item">
+                <span class="spec-label">Capacity</span>
+                <span class="spec-value">3,200 cu in</span>
+            </div>
+            <div class="spec-item">
+                <span class="spec-label">Material</span>
+                <span class="spec-value">210D Ripstop Nylon</span>
+            </div>
+            <div class="spec-item">
+                <span class="spec-label">Frame</span>
+                <span class="spec-value">Removable Aluminum</span>
+            </div>
+            <div class="spec-item">
+                <span class="spec-label">Load Capacity</span>
+                <span class="spec-value">75 lbs</span>
+            </div>
+            <div class="spec-item">
+                <span class="spec-label">Waterproofing</span>
+                <span class="spec-value">DWR Coating</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <h2>Join the Adventure</h2>
+        <p>Each LudicLife pack is handcrafted to order. Ready to embrace spontaneous exploration?</p>
+        <a href="mailto:contact@ludiclife.com" class="cta-button">Get in Touch</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 LudicLife.com · Handcrafted Adventures</p>
+    </footer>
+</body>
+</html>
